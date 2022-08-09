@@ -1,0 +1,13 @@
+{
+  "miniprogramRoot": "./dist",
+  "projectname": "xcx-ts",
+  "description": "小程序",
+  "appid": "wxf18966ace3bbbd97",
+  "setting": {
+    "urlCheck": true,
+    "es6": false,
+    "postcss": false,
+    "minified": false
+  },
+  "compileType": "miniprogram"
+}

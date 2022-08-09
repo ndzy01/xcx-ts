@@ -1,0 +1,9 @@
+{
+  "miniprogramRoot": "./",
+  "projectname": "xcx-ts",
+  "appid": "wxf18966ace3bbbd97",
+  "setting": {
+    "es6": false,
+    "minified": false
+  }
+}
