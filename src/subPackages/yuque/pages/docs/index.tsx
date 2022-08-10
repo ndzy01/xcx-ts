@@ -4,7 +4,7 @@ import { View } from '@tarojs/components';
 import { useSetState } from 'ahooks';
 import { AtAccordion, AtList, AtListItem } from 'taro-ui';
 import Taro, { useReady } from '@tarojs/taro';
-import './index.scss';
+import { goPage } from '@/utils';
 
 interface DocRecord {
   id: string;
@@ -13,7 +13,7 @@ interface DocRecord {
   fTitle?: string;
   fSlug?: string;
 }
-const List = ({ list }: { list: DocRecord[] }) => {
+const List = ({ list, uid }: { list: DocRecord[]; uid: string }) => {
   const [s, setS] = useSetState<{ open: boolean }>({ open: false });
 
   return list.length ? (
@@ -29,8 +29,11 @@ const List = ({ list }: { list: DocRecord[] }) => {
             title={l.title}
             onClick={() => {
               Taro.setClipboardData({
-                data: `https://www.yuque.com/u22409297/${l.fSlug}/${l.slug}`,
+                data: `https://www.yuque.com/${uid}/${l.fSlug}/${l.slug}`,
               });
+              goPage(
+                `/subPackages/yuque/pages/docDetail/index?url=https://www.yuque.com/${uid}/${l.fSlug}/${l.slug}?view=doc_embed&from=asite&outline=1`,
+              );
             }}
           />
         ))}
@@ -41,7 +44,10 @@ const List = ({ list }: { list: DocRecord[] }) => {
   );
 };
 const Docs = () => {
-  const [s, setS] = useSetState<{ list: DocRecord[][] }>({ list: [] });
+  const [s, setS] = useSetState<{ list: DocRecord[][]; uid: string }>({
+    list: [],
+    uid: '',
+  });
   const { run } = useReq();
 
   useReady(async () => {
@@ -78,7 +84,7 @@ const Docs = () => {
           );
         }
         Taro.hideLoading();
-        setS({ list: res as any });
+        setS({ list: res, uid: d1.data.data.id });
       }
     } catch (error) {
       Taro.hideLoading();
@@ -88,7 +94,7 @@ const Docs = () => {
   return (
     <Page>
       {s.list.map((item, index) => (
-        <List key={index} list={item} />
+        <List key={index} list={item} uid={s.uid} />
       ))}
     </Page>
   );

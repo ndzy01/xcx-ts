@@ -11,7 +11,7 @@ const config = {
   },
   sourceRoot: 'src',
   outputRoot: 'dist',
-  plugins: [],
+  plugins: ['@tarojs/plugin-html'],
   defineConstants: {},
   copy: {
     patterns: [],
@@ -63,6 +63,18 @@ const config = {
         config: {
           namingPattern: 'module', // 转换模式，取值为 global/module
           generateScopedName: '[name]__[local]___[hash:base64:5]',
+        },
+      },
+    },
+    devServer: {
+      host: 'localhost',
+      port: 10086,
+      proxy: {
+        '/ndzy': {
+          target: 'https://www.yuque.com',
+          changeOrigin: true,
+          secure: false,
+          pathRewrite: { '/ndzy': '' },
         },
       },
     },

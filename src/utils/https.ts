@@ -12,7 +12,11 @@ class Request {
   baseUrl: string;
 
   constructor(baseUrl: string) {
-    this.baseUrl = baseUrl;
+    if (Taro.getEnv() === 'WEB') {
+      this.baseUrl = '/ndzy/api/v2';
+    } else {
+      this.baseUrl = baseUrl;
+    }
   }
 
   req(config: Config) {

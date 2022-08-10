@@ -20,10 +20,10 @@ const Index = () => {
         setS({ showCountdown: true });
         break;
       case '语雀文档':
-        goPage('/subPackages/yuque/docs/pages/docs/index');
+        goPage('/subPackages/yuque/pages/docs/index');
         break;
       case '搜索文档':
-        goPage('/subPackages/yuque/docs/pages/docsSearch/index');
+        goPage('/subPackages/yuque/pages/docsSearch/index');
         break;
         break;
       default:

@@ -4,6 +4,7 @@ import { useSetState } from 'ahooks';
 import { AtSearchBar } from 'taro-ui';
 import Taro from '@tarojs/taro';
 import { View } from '@tarojs/components';
+import { goPage } from '@/utils';
 
 const Search = () => {
   const [s, setS] = useSetState({ type: 'doc', q: '', list: [], msg: '' });
@@ -29,9 +30,9 @@ const Search = () => {
             });
             Taro.hideLoading();
             if (data.data.data.length > 0) {
-              setS({ list: data.data.data || [] });
+              setS({ list: data.data.data || [], msg: '' });
             } else {
-              setS({ msg: '没有找到奥' });
+              setS({ msg: '没有找到奥', list: [] });
             }
           }
         }}
@@ -42,8 +43,11 @@ const Search = () => {
           key={_.id}
           onClick={() => {
             Taro.setClipboardData({
-              data: `https://www.yuque.com/u22409297/fqv2ol/${_.target.slug}`,
+              data: `https://www.yuque.com${_.url}`,
             });
+            goPage(
+              `/subPackages/yuque/pages/docDetail/index?url=https://www.yuque.com${_.url}?view=doc_embed&from=asite&outline=1`,
+            );
           }}
         >
           {_.title}

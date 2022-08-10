@@ -8,8 +8,12 @@ export default {
   },
   subPackages: [
     {
-      root: 'subPackages/yuque/docs/',
-      pages: ['pages/docsSearch/index', 'pages/docs/index'],
+      root: 'subPackages/yuque/',
+      pages: [
+        'pages/docsSearch/index',
+        'pages/docs/index',
+        'pages/docDetail/index',
+      ],
     },
   ],
 };
