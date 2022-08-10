@@ -11,6 +11,7 @@ interface DocRecord {
   slug: string;
   title: string;
   fTitle?: string;
+  fSlug?: string;
 }
 const List = ({ list }: { list: DocRecord[] }) => {
   const [s, setS] = useSetState<{ open: boolean }>({ open: false });
@@ -28,7 +29,7 @@ const List = ({ list }: { list: DocRecord[] }) => {
             title={l.title}
             onClick={() => {
               Taro.setClipboardData({
-                data: `https://www.yuque.com/u22409297/fqv2ol/${l.slug}`,
+                data: `https://www.yuque.com/u22409297/${l.fSlug}/${l.slug}`,
               });
             }}
           />
@@ -72,6 +73,7 @@ const Docs = () => {
             (data.data?.data || []).map((item: DocRecord) => ({
               ...item,
               fTitle: ele.name,
+              fSlug: ele.slug,
             })),
           );
         }
